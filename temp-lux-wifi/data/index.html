@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ESP32 Sensor Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f7f7;
+      }
+      h1 {
+        background-color: #4CAF50;
+        color: white;
+        margin: 0;
+        padding: 20px;
+      }
+      .sensor {
+        margin: 20px;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .sensor p {
+        font-size: 20px;
+        margin: 10px 0;
+      }
+      .button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ESP32 Sensor Dashboard</h1>
+    <div class="sensor">
+      <h2>Temperature</h2>
+      <p id="temp">Loading...</p>
+      <button class="button" onclick="getTemperature()">Get Temperature</button>
+    </div>
+    <div class="sensor">
+      <h2>Light Intensity</h2>
+      <p id="light">Loading...</p>
+      <button class="button" onclick="getLightIntensity()">Get Light Intensity</button>
+    </div>
+    <div class="sensor">
+      <h2>LED Status</h2>
+      <p id="led-status">Checking...</p>
+    </div>
+
+    <script>
+      // Fetch temperature
+      function getTemperature() {
+        fetch('/temperature')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('temp').innerText = data + ' °C';
+          })
+          .catch(error => {
+            console.error('Error fetching temperature:', error);
+            document.getElementById('temp').innerText = 'Error!';
+          });
+      }
+
+      // Fetch light intensity
+      function getLightIntensity() {
+        fetch('/light')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('light').innerText = data + ' lux';
+            updateLedStatus(parseInt(data));
+          })
+          .catch(error => {
+            console.error('Error fetching light intensity:', error);
+            document.getElementById('light').innerText = 'Error!';
+          });
+      }
+
+      // Update LED status based on light intensity
+      function updateLedStatus(lux) {
+        const ledStatus = lux < 400 ? 'ON' : 'OFF';
+        document.getElementById('led-status').innerText = `LED is ${ledStatus}`;
+      }
+
+      // Fetch data periodically
+      setInterval(() => {
+        getTemperature();
+        getLightIntensity();
+      }, 5000);
+    </script>
+  </body>
+</html>
