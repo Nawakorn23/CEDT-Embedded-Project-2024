@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ESP32 Temperature</title>
+    <style>
+      body { font-family: Arial, sans-serif; text-align: center; }
+      .button { padding: 10px 20px; font-size: 16px; margin-top: 20px; }
+    </style>
+  </head>
+  <body>
+    <h1>Current Temperature</h1>
+    <p id="temp">Loading...</p>
+    <button class="button" onclick="getTemperature()">Get Temperature</button>
+
+    <script>
+      function getTemperature() {
+        fetch('/temperature')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('temp').innerText = data + ' °C';
+          });
+      }
+      // Optionally, you can fetch temperature automatically every few seconds
+      setInterval(getTemperature, 5000);
+    </script>
+  </body>
+</html>
