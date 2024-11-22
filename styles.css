@@ -85,109 +85,122 @@ header {
     }
 } */
 
-
-
-
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #e3f2fd;
-    color: #004d80;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e3f2fd;
+  color: #004d80;
 }
 
 header {
-    background-color: #81d4fa;
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 1.8em;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #81d4fa;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 1.8em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
 }
 
 .video-container {
-    width: 80%;
-    max-width: 600px;
+  width: 60%; /* ความกว้างเป็น 40% ของพื้นที่เว็บ */
+  max-width: 800px; /* จำกัดความกว้างไม่เกิน 800px */
+  margin: 0 auto; /* จัดกึ่งกลางในแนวนอน */
+  position: relative;
+  padding-top: 35%; 
+  border-radius: 15px; /* ทำขอบมน */
+  overflow: hidden; /* ตัดส่วนที่เกินออก */
+  background: #000; /* ใส่พื้นหลังสีดำ (สำหรับรอโหลดวิดีโอ) */
 }
 
-.video-container video {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+#camera-stream {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none; /* ลบเส้นขอบของ iframe */
 }
+
+@media (max-width: 500px) {
+  .video-container {
+    width: 90%; /* ลดความกว้างสำหรับหน้าจอเล็ก */
+  }
+}
+
 
 .light-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .light-icons {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .light-icon {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
 }
 
 .light-icon img {
-    width: 40px;
-    height: 55px;
-    transition: transform 0.2s;
+  width: 40px;
+  height: 55px;
+  transition: transform 0.2s;
 }
 
 .light-icon img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .parameters-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    width: 100%;
-    max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .parameter {
-    background: #ffffff;
-    border: 1px solid #b3e5fc;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border: 1px solid #b3e5fc;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .parameter h3 {
-    margin: 0 0 10px;
-    font-size: 1.3em;
+  margin: 0 0 10px;
+  font-size: 1.3em;
 }
 
 .value {
-    font-size: 2.5em;
-    color: #0288d1;
+  font-size: 2.5em;
+  color: #0288d1;
 }
 
 @media screen and (max-width: ุ600px) {
-    .parameters-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .parameters-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media screen and (max-width: 400px) {
-    .parameters-container {
-        grid-template-columns: 1fr;
-    }
+  .parameters-container {
+    grid-template-columns: 1fr;
+  }
 }
