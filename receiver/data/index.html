@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sensor Data</title>
+</head>
+<body>
+  <h1>Sensor Data</h1>
+  <p id="data">Loading...</p>
+  <script src="script.js?v=2">
+    async function fetchData() {
+      const response = await fetch('/sensor-data');
+      const data = await response.json();
+      document.getElementById('data').innerText = 
+        `Water Level: ${data.waterLevel}, Light Intensity: ${data.lightIntensity}`;
+    }
+    setInterval(fetchData, 2000);
+  </script>
+</body>
+</html>

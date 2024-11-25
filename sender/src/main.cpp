@@ -2,6 +2,10 @@
 #include <WiFi.h>
 #include "../lib/BH1750FVI/src/BH1750FVI.h"
 
+// Wi-Fi Credentials
+const char* ssid = "Donut";
+const char* password = "11111111";
+
 // กำหนดพินและตัวแปรสำหรับ Water Sensor
 int waterSensorPin = 34; // พินที่ใช้สำหรับเซ็นเซอร์น้ำ
 int waterVal = 0;
@@ -37,6 +41,20 @@ void setup()
 
   // ตั้งค่า Wi-Fi โหมด Station
   WiFi.mode(WIFI_STA);
+
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to WiFi");
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(1000);
+  }
+  Serial.println("\nConnected to WiFi");
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.localIP());
+
+  // Set the same WiFi channel for ESP-NOW communication
+  // uint8_t channel = 1; // Replace with the desired channel (1-11)
+  // esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE);
 
   // เริ่มต้น ESP-NOW
   if (esp_now_init() != ESP_OK)
