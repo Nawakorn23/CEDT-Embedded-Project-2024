@@ -1,22 +1,20 @@
 #include <WiFi.h>
 #include <esp_now.h>
-#include <ESPAsyncWebServer.h>
-#include <SPIFFS.h>
 #include <Firebase_ESP_Client.h>
 #include <ArduinoJson.h>
-#include <Wire.h>
-#include <AsyncTCP.h>
-#include <HTTPClient.h>
 
 
 
 // Wi-Fi Credentials
-const char* ssid = "Donut";
-const char* password = "11111111";
+const char* ssid = "Nawa";
+const char* password = "12345678";
 
 // Firebase Config
 #define API_KEY "AIzaSyBq9hl0wAQIoJE23duUVDbvMTUetpdAijA"
-#define DATABASE_URL "https://lux-lv-default-rtdb.asia-southeast1.firebasedatabase.app/"
+#define DATABASE_URL "lux-lv-default-rtdb.asia-southeast1.firebasedatabase.app"
+
+
+
 // Firebase Data Object
 FirebaseData fbdo;
 FirebaseAuth auth;
@@ -66,9 +64,7 @@ void onReceive(const uint8_t *macAddr, const uint8_t *incomingData, int len) {
 
 void setup() {
   Serial.begin(115200);
-
-  // ตั้งค่า Wi-Fi โหมด Station
-  WiFi.mode(WIFI_STA);
+ 
   WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi");
   while (WiFi.status() != WL_CONNECTED) {

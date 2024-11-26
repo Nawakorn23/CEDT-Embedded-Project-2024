@@ -119,5 +119,5 @@ void loop()
     Serial.println("Error sending data");
   }
 
-  delay(2000); // ส่งข้อมูลทุก 2 วินาที
+  delay(1000); // ส่งข้อมูลทุก 2 วินาที
 }
