@@ -5,7 +5,7 @@
 #define B 3977        // K
 #define VCC 3.3       // แรงดันไฟฟ้าเลี้ยง
 #define R 10000       // ตัวต้านทานคงที่ R=10KΩ
-#define SENSOR_PIN 36 // ขา ADC
+#define SENSOR_PIN 34 // ขา ADC 36
 
 // Variables
 float RT, VR, ln, Temp, T0_temp, Read;
